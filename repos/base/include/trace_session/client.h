@@ -101,6 +101,9 @@ struct Genode::Trace::Session_client : Genode::Rpc_client<Genode::Trace::Session
 		RAM_info ram_info(Subject_id subject) override {
 			return call<Rpc_ram_info>(subject); }
 
+		SCHEDULER_info scheduler_info(Subject_id subject) override {
+			return call<Rpc_scheduler_info>(subject); }
+
 		Dataspace_capability buffer(Subject_id subject) override {
 			return call<Rpc_buffer>(subject); }
 

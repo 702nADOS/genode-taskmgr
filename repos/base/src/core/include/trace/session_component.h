@@ -102,6 +102,7 @@ class Genode::Trace::Session_component
 		void resume(Subject_id);
 		CPU_info cpu_info(Subject_id);
 		RAM_info ram_info(Subject_id);
+		SCHEDULER_info scheduler_info(Subject_id);
 		Dataspace_capability buffer(Subject_id);
 		void free(Subject_id);
 };

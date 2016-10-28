@@ -34,6 +34,7 @@ namespace Genode { namespace Trace {
 	struct Execution_time;
 	struct CPU_info;
 	struct RAM_info;
+	struct SCHEDULER_info;
 } }
 
 
@@ -110,6 +111,8 @@ class Genode::Trace::CPU_info
 		Execution_time     _execution_time;
 		Affinity::Location _affinity;
 		unsigned	   _prio;
+		unsigned	   _id;
+
 
 	public:
 
@@ -120,12 +123,13 @@ class Genode::Trace::CPU_info
 		             State state, Policy_id policy_id,
 		             Execution_time execution_time,
 		             Affinity::Location affinity,
-			     unsigned prio
+			     unsigned prio,
+			     unsigned id
 				)
 		:
 			_session_label(session_label), _thread_name(thread_name),
 			_state(state), _policy_id(policy_id),
-			_execution_time(execution_time), _affinity(affinity), _prio(prio)
+			_execution_time(execution_time), _affinity(affinity), _prio(prio), _id(id)
 		{ }
 
 		Session_label const &session_label()  const { return _session_label; }
@@ -135,6 +139,8 @@ class Genode::Trace::CPU_info
 		Execution_time       execution_time() const { return _execution_time; }
 		Affinity::Location   affinity()       const { return _affinity; }
 		unsigned	     prio()	      const { return _prio; }
+		unsigned	     id()	      const { return _id; }
+
 };
 
 class Genode::Trace::RAM_info
@@ -164,6 +170,44 @@ class Genode::Trace::RAM_info
 		Thread_name   const &thread_name()    const { return _thread_name; }
 		size_t		     ram_quota()      const { return _ram_quota; }
 		size_t		     ram_used()	      const { return _ram_used; }
+};
+
+class Genode::Trace::SCHEDULER_info
+{
+	private:
+
+		Execution_time	_idle;
+		bool		_core0_is_online;
+		bool		_core1_is_online;
+		bool		_core2_is_online;
+		bool		_core3_is_online;
+		unsigned	_num_cores;
+		long unsigned int	   _foc_id;
+
+	public:
+
+		SCHEDULER_info() {}
+
+		SCHEDULER_info(Execution_time idle,
+				bool core0_is_online,
+				bool core1_is_online,
+				bool core2_is_online,
+				bool core3_is_online,
+				unsigned num_cores,
+			    	long unsigned int foc_id)
+		:
+			_idle(idle), _core0_is_online(core0_is_online), _core1_is_online(core1_is_online),
+			_core2_is_online(core2_is_online), _core3_is_online(core3_is_online),
+			_num_cores(num_cores), _foc_id(foc_id)
+		{}
+
+		Execution_time		idle()			const { return _idle; }
+		bool			core0_is_online()	const { return _core0_is_online; }
+		bool			core1_is_online()	const { return _core1_is_online; }
+		bool			core2_is_online()	const { return _core2_is_online; }
+		bool			core3_is_online()	const { return _core3_is_online; }
+		unsigned		num_cores()		const { return _num_cores; }
+		long unsigned int	     foc_id()	      const { return _foc_id; }
 };
 
 #endif /* _INCLUDE__BASE__TRACE__TYPES_H_ */

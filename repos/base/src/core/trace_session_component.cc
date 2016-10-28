@@ -139,6 +139,12 @@ RAM_info Session_component::ram_info(Subject_id subject_id)
 	
 }
 
+SCHEDULER_info Session_component::scheduler_info(Subject_id subject_id)
+{
+	return _subjects.lookup_by_id(subject_id)->info_scheduler();
+	
+}
+
 
 Dataspace_capability Session_component::buffer(Subject_id subject_id)
 {

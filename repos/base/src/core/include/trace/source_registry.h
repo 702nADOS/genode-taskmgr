@@ -57,8 +57,16 @@ class Genode::Trace::Source
 			Execution_time     execution_time;
 			Affinity::Location affinity;
 			unsigned	   prio;
-			size_t ram_quota;
-			size_t ram_used;
+			unsigned	   id;
+			unsigned	   foc_id;
+			Execution_time	   idle;
+			bool		   core0_is_online;
+			bool		   core1_is_online;
+			bool		   core2_is_online;
+			bool		   core3_is_online;
+			unsigned	   num_cores;
+			size_t 		   ram_quota;
+			size_t 		   ram_used;
 		};
 
 		/**
